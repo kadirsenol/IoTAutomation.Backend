@@ -7,6 +7,13 @@ namespace IoTAutomation.DataAccessLayer.DBContexts
 {
     public class SqlDbContext : DbContext
     {
+        public SqlDbContext()
+        {
+
+        }
+        public SqlDbContext(DbContextOptions<SqlDbContext> options) : base(options)
+        {
+        }
         public DbSet<Solution> Solutions { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<CartDetail> CartDetails { get; set; }
@@ -23,7 +30,7 @@ namespace IoTAutomation.DataAccessLayer.DBContexts
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=.;Database=IoTAutomation;Trusted_Connection=True; Trust Server Certificate=true; MultipleActiveResultSets=True");
+            optionsBuilder.UseSqlServer(@"Server=.;Database=IoTAutomation; Trusted_Connection=True; TrustServerCertificate=true; MultipleActiveResultSets=True;");
         }
 
         // Soft delete olarak calistigimiz veritabanimizda delete islemi gerceklestiginde changetracker kayıt olan deleted islemlerini

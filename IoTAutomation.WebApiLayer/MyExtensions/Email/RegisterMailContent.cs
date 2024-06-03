@@ -56,7 +56,7 @@ namespace IoTAutomation.WebApiLayer.MyExtensions.Email
                                     <div class='text' style='padding: 0 2.5em; text-align: center; margin-top: -110px;'>
                                         <h2>Hey {username}! Please verify your email</h2>
                                         <h3>You need to click on the button below to complete your membership.</h3>
-                                       <a href='http://localhost:5051/api/Account/ConfirmEmail?uid={withiduserid}&code={code}' style='display: inline-block; padding: 10px 15px; border-radius: 5px; background: #333635; color: #ffffff; text-decoration: none;'>Yes! Subscribe Me</a>
+                                       <a href='http://localhost:5051/Account/ConfirmEmail?uid={withiduserid}&code={code}' style='display: inline-block; padding: 10px 15px; border-radius: 5px; background: #333635; color: #ffffff; text-decoration: none;'>Yes! Subscribe Me</a>
 
                                     </div>
                                 </td>

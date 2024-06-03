@@ -44,13 +44,14 @@ namespace IoTAutomation.WebApiLayer.MyExtensions.Services
 
         public static IServiceCollection AddCorsSetting(this IServiceCollection services)
         {
-            services.AddCors(options => options.AddDefaultPolicy(builder => // Butun originlerden gelen isteklerinde kabul edilmesi icin gerekli ayarlar eklentisi.
-                                                                        builder.AllowAnyHeader() //Gelen isteklerde butun basliklarin kabul edilmesi
-                                                                        .AllowAnyMethod()
-                                                                        .AllowAnyOrigin()));
-
+            services.AddCors(options => options.AddDefaultPolicy(builder =>
+                                                                        builder.AllowAnyOrigin() //WithOrigins("https://kadirsenol.com") //Site olarak sadece buradan gelen isteklere izin ver.
+                                                                        .AllowAnyHeader() //Gelen isteklerde butun basliklarin kabul edilmesi
+                                                                        .AllowAnyMethod()));
             return services;
 
         }
+
+
     }
 }

@@ -1,7 +1,8 @@
 
+using IoTAutomation.DataAccessLayer.DBContexts;
 using IoTAutomation.WebApiLayer.MyExtensions.AutoMapper;
 using IoTAutomation.WebApiLayer.MyExtensions.Services;
-using Microsoft.IdentityModel.Logging;
+using Microsoft.EntityFrameworkCore;
 
 namespace IoTAutomation.WebApiLayer
 {
@@ -19,6 +20,7 @@ namespace IoTAutomation.WebApiLayer
             builder.Services.AddCorsSetting(); //MyExtensions class (Farkli originlerden(platformlardan) gelen tum istekleri kabul et)
             builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
             builder.Services.AddHttpContextAccessor();
+            builder.Services.AddDbContext<SqlDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("MyDb")));
 
 
             builder.Services.AddControllers();
@@ -38,10 +40,11 @@ namespace IoTAutomation.WebApiLayer
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
-                IdentityModelEventSource.ShowPII = true; ///BUNU SÝL
             }
 
-            app.UseCors();//Eklemis oldugum CorsSettingi kullanmasi icin gerekli middleware.
+            app.UseCors();//Eklemis oldugum CorsSettingi kullanmasi icin gerekli middleware. // Postman ve browserden gelen isteklere uygulanmaz                        
+            //app.UseCheckCorsOrigin(); // Trayýcýdan ve postmanden gelen farklý origin isteklerine uygulamak icin.
+
             app.UseHttpsRedirection();
             app.UseAuthentication();//JWT ile login islemi icin Authentication middleware eklentisi. JWT veya Cookie kullanmazsan buna gerek yok.
             app.UseAuthorization();
